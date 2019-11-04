@@ -11,7 +11,7 @@ export default async (ctx: ParameterizedContext, next: any) => {
       if (ctx.isAuthenticated()) {
         const decoded = jwt.verify(ctx.headers.token, config.secret) as any
         if (!decoded) {
-          ctx.throw(401)
+          ctx.body = ctx.resp.fail({ message: '权限验证失败' })
           return
         }
         const user = await User.findOne({
@@ -20,16 +20,18 @@ export default async (ctx: ParameterizedContext, next: any) => {
           }
         })
         if (!user) {
-          ctx.status = 401
+          ctx.body = ctx.resp.fail({ message: '权限验证失败' })
           return
         }
         // ctx.state.user = decoded
         await next()
       } else {
-        ctx.throw(401)
+        ctx.body = ctx.resp.fail({ message: '权限验证失败' })
+        return
       }
     }
   } catch (error) {
-    ctx.throw(error)
+    ctx.body = ctx.resp.fail({ message: '权限验证失败' })
+    return
   }
 }
