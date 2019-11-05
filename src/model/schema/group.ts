@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 17:55:00
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-04 17:59:06
+ * @ Modified time: 2019-11-05 14:27:21
  * @ Description:组模型
  */
 
@@ -29,4 +29,4 @@ const schema = new Schema({
 schema.index({ user: 1, create_at: -1 })
 schema.index({ name: 1 }, { unique: true })
 
-module.exports = mongoose.model('Group', schema)
+export default mongoose.model('Group', schema)

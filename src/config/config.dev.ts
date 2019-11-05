@@ -10,7 +10,7 @@ const config = {
   },
   whitelist: [ '/api/user/login', '/api/user/register', '/api/util/wallpaper' ],
   mongodb: {
-    url: 'mongodb://localhost/easy-mock'
+    url: 'mongodb://localhost/easy-mock-dev'
   },
   admin: {
     username: 'admin',
