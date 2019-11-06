@@ -14,12 +14,8 @@ export default async (ctx: ParameterizedContext, next: any) => {
           ctx.body = ctx.resp.fail({ message: '权限验证失败', code: 401 })
           return
         }
-        ctx.state = decoded
-        const user = await User.findOne({
-          where: {
-            id: decoded.id
-          }
-        })
+        ctx.state.user = decoded
+        const user = await User.findById(decoded.id)
         if (!user) {
           ctx.body = ctx.resp.fail({ message: '权限验证失败', code: 401 })
           return
