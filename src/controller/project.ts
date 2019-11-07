@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 18:03:48
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-06 17:31:43
+ * @ Modified time: 2019-11-07 17:39:04
  * @ Description: 项目控制层
  */
 
@@ -36,6 +36,22 @@ export async function getProjects(ctx: ParameterizedContext) {
   } catch (error) {
     console.log(error)
     ctx.body = ctx.resp.fail({ message: '列表获取失败' })
+  }
+}
+
+/**
+ * @description 创建项目
+ * @author chenkaibo
+ * @date 2019-11-07
+ * @export
+ * @param {ParameterizedContext} ctx
+ */
+export async function createProject(ctx: ParameterizedContext) {
+  try {
+    await Project.create(ctx.request.body)
+    ctx.body = ctx.resp.success({ message: '项目创建成功' })
+  } catch (error) {
+    ctx.body = ctx.resp.fail({ message: '项目创建失败' })
   }
 }
 

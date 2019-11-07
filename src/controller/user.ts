@@ -14,8 +14,16 @@ const gravatar = [
   '//img.souche.com/20161230/png/bc836261fbb654dda6b653e428014279.png',
   '//img.souche.com/20161230/png/fd9f8aecab317e177655049a49b64d02.png'
 ]
-// 用户登录
-export const login = async (ctx: ParameterizedContext, next: any) => {
+/**
+ * @description 用户登录
+ * @author chenkaibo
+ * @date 2019-11-07
+ * @export
+ * @param {ParameterizedContext} ctx
+ * @param {*} next
+ * @returns 
+ */
+export async function login(ctx: ParameterizedContext, next: any) {
   try {
     const { username } = ctx.request.body
     const exists = await User.findOne({ username })
@@ -59,5 +67,23 @@ export const login = async (ctx: ParameterizedContext, next: any) => {
     })(ctx, next)
   } catch (error) {
     ctx.throw(error)
+  }
+}
+
+/**
+ * @description 通过关键字查找用户
+ * @author chenkaibo
+ * @date 2019-11-07
+ * @export
+ * @param {ParameterizedContext} ctx
+ */
+export async function findUserByKeyword(ctx: ParameterizedContext) {
+  try {
+    const { keyword } = ctx.query
+    const keyExp = new RegExp(keyword, 'i')
+    const users = await User.find({ username: keyExp }).lean()
+    ctx.body = ctx.resp.success({ data: users })
+  } catch (error) {
+    ctx.body = ctx.resp.fail({})
   }
 }
