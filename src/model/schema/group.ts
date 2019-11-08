@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 17:55:00
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-05 14:27:21
+ * @ Modified time: 2019-11-08 15:18:19
  * @ Description:组模型
  */
 
@@ -20,6 +20,13 @@ const schema = new Schema({
     type: String,
     unique: true
   },
+  members: [
+    {
+      type: ObjectId,
+      ref: 'User',
+      default: []
+    }
+  ],
   create_at: {
     type: Date,
     default: Date.now
