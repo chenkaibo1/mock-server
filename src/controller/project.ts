@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 18:03:48
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-08 18:40:30
+ * @ Modified time: 2019-11-11 09:48:27
  * @ Description: 项目控制层
  */
 
@@ -36,6 +36,23 @@ export async function getProjects(ctx: ParameterizedContext) {
   } catch (error) {
     console.log(error)
     ctx.body = ctx.resp.fail({ message: '列表获取失败' })
+  }
+}
+
+/**
+ * @description 获取团队下的项目
+ * @author chenkaibo
+ * @date 2019-11-07
+ * @export
+ * @param {ParameterizedContext} ctx
+ */
+export async function getProjectsByGroup(ctx: ParameterizedContext) {
+  try {
+    const { group } = ctx.query
+    const projects = await Project.find({ group }).populate([ 'user', 'members', 'group' ]).lean()
+    ctx.body = ctx.resp.success({ data: projects })
+  } catch (error) {
+    ctx.body = ctx.resp.fail({})
   }
 }
 
