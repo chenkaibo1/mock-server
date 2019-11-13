@@ -1,3 +1,11 @@
+/**
+ * @ Author: chenkaibo
+ * @ Create Time: 2019-11-02 10:43:03
+ * @ Modified by: chenkaibo
+ * @ Modified time: 2019-11-13 17:29:53
+ * @ Description:用户控制层
+ */
+
 import { User, Project, Mock } from '../model'
 import { ParameterizedContext } from 'koa'
 import passportLocal from '../common/possport'

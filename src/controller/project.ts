@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 18:03:48
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-12 09:41:19
+ * @ Modified time: 2019-11-13 17:50:57
  * @ Description: 项目控制层
  */
 
@@ -49,8 +49,6 @@ export async function getProjects(ctx: ParameterizedContext) {
 export async function getProjectDetail(ctx: ParameterizedContext) {
   try {
     const project = await Project.findById(ctx.params.id).populate([ 'user', 'members', 'group' ]).lean()
-    const mocks = await Mock.find({ project: ctx.params.id }).lean()
-    project.mocks = mocks
     ctx.body = ctx.resp.success({ data: project })
   } catch (error) {
     ctx.body = ctx.resp.fail({})
