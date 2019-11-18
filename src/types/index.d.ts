@@ -7,8 +7,8 @@ declare module 'koa' {
   }
   interface BaseContext {
     resp: {
-      success(resp: Resp): void
-      fail(resp: Resp): void
+      success(resp?: Resp): void
+      fail(resp?: Resp): void
     }
   }
 }

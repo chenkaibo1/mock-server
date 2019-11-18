@@ -158,6 +158,14 @@
     "@types/koa" "*"
     "@types/passport" "*"
 
+"@types/koa-ratelimit@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.npm.taobao.org/@types/koa-ratelimit/download/@types/koa-ratelimit-4.1.1.tgz#e3401af76f36b422aac876e57848313a0e399351"
+  integrity sha1-40Aa9282tCKqyHbleEgxOg45k1E=
+  dependencies:
+    "@types/koa" "*"
+    "@types/redis" "*"
+
 "@types/koa-router@^7.0.42":
   version "7.0.42"
   resolved "https://registry.npm.taobao.org/@types/koa-router/download/@types/koa-router-7.0.42.tgz#0e5c01d4d0a2873d402d432114f08372d7c50eb1"
@@ -209,6 +217,11 @@
   resolved "https://registry.npm.taobao.org/@types/mime/download/@types/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
   integrity sha1-3EiIQjEqfwdRSTEpBbXjwLBUx50=
 
+"@types/mockjs@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/@types/mockjs/download/@types/mockjs-1.0.2.tgz#89887151c9b903028e9b569a28b4ad079d79943b"
+  integrity sha1-iYhxUcm5AwKOm1aaKLStB515lDs=
+
 "@types/mongodb@*":
   version "3.3.6"
   resolved "https://registry.npm.taobao.org/@types/mongodb/download/@types/mongodb-3.3.6.tgz#ed8a2ff4a27170f8da284d817235c46019bdaa24"
@@ -259,12 +272,19 @@
   dependencies:
     "@types/express" "*"
 
+"@types/path-to-regexp@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.npm.taobao.org/@types/path-to-regexp/download/@types/path-to-regexp-1.7.0.tgz#f1af9d9c9db5f8ad80aa75ed424db665c48d6cd4"
+  integrity sha1-8a+dnJ21+K2AqnXtQk22ZcSNbNQ=
+  dependencies:
+    path-to-regexp "*"
+
 "@types/range-parser@*":
   version "1.2.3"
   resolved "https://registry.npm.taobao.org/@types/range-parser/download/@types/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha1-fuMwunyq+5gJC+zoal7kQRWQTCw=
 
-"@types/redis@^2.8.14":
+"@types/redis@*", "@types/redis@^2.8.14":
   version "2.8.14"
   resolved "https://registry.npm.taobao.org/@types/redis/download/@types/redis-2.8.14.tgz#2ed46d0f923f7ccd63fbe73a46a1241e606cf716"
   integrity sha1-LtRtD5I/fM1j++c6RqEkHmBs9xY=
@@ -939,6 +959,16 @@ koa-passport@^4.1.3:
   dependencies:
     passport "^0.4.0"
 
+koa-ratelimit@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.npm.taobao.org/koa-ratelimit/download/koa-ratelimit-4.3.0.tgz#2129657f1ca5d42d7aba3faba11ce623d6ee9071"
+  integrity sha1-ISllfxyl1C16uj+roRzmI9bukHE=
+  dependencies:
+    debug "^4.1.1"
+    lodash.defaults "^4.2.0"
+    ms "^2.1.1"
+    ratelimiter "^3.2.0"
+
 koa-redis@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npm.taobao.org/koa-redis/download/koa-redis-4.0.0.tgz#565dc700190432989fb2096ca4341240a84698dd"
@@ -1297,6 +1327,11 @@ path-parse@^1.0.6:
   resolved "https://registry.npm.taobao.org/path-parse/download/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
   integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
 
+path-to-regexp@*, path-to-regexp@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-5.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-5.0.0.tgz#e56dd58778b9dc06e76f0f3e39e741bbddc0bd26"
+  integrity sha1-5W3Vh3i53Abnbw8+OedBu93AvSY=
+
 path-to-regexp@^1.1.1:
   version "1.7.0"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-1.7.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
@@ -1347,6 +1382,11 @@ random-bytes@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/random-bytes/download/random-bytes-1.0.0.tgz#4f68a1dc0ae58bd3fb95848c30324db75d64360b"
   integrity sha1-T2ih3Arli9P7lYSMMDJNt11kNgs=
+
+ratelimiter@^3.2.0:
+  version "3.4.0"
+  resolved "https://registry.npm.taobao.org/ratelimiter/download/ratelimiter-3.4.0.tgz#05cd43f64ea1e0d73da85ee0dddbc9426313e762"
+  integrity sha1-Bc1D9k6h4Nc9qF7g3dvJQmMT52I=
 
 raw-body@^2.3.3:
   version "2.4.1"
@@ -1444,6 +1484,11 @@ resolve@^1.3.2:
   integrity sha1-P8ZEo1yEpIVUYJ/ybsUrZvpXffY=
   dependencies:
     path-parse "^1.0.6"
+
+restc@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npm.taobao.org/restc/download/restc-0.4.0.tgz#f069df87c8d670cbb6962825eb2834062285141a"
+  integrity sha1-8Gnfh8jWcMu2ligl6yg0BiKFFBo=
 
 rimraf@^2.6.2:
   version "2.7.1"
@@ -1717,6 +1762,11 @@ vary@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
+
+vm2@^3.8.4:
+  version "3.8.4"
+  resolved "https://registry.npm.taobao.org/vm2/download/vm2-3.8.4.tgz#882be9135467942d84d1af80b6e6549b57c69041"
+  integrity sha1-iCvpE1RnlC2E0a+AtuZUm1fGkEE=
 
 which@^1.2.9:
   version "1.3.1"

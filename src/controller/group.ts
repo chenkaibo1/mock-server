@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-07 16:30:53
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-08 17:00:19
+ * @ Modified time: 2019-11-18 15:14:17
  * @ Description: 团队控制层
  */
 
@@ -61,9 +61,9 @@ export async function createGroup(ctx: ParameterizedContext) {
     if (group) {
       ctx.body = ctx.resp.fail({ message: '该团队已存在' })
     }
-    ctx.body = ctx.resp.success({ message: '团队创建成功', data: { _id: doc._id } })
+    ctx.body = ctx.resp.success({ data: { _id: doc._id } })
   } catch (error) {
-    ctx.body = ctx.resp.fail({ message: '团队创建失败' })
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -77,9 +77,9 @@ export async function createGroup(ctx: ParameterizedContext) {
 export async function editGroup(ctx: ParameterizedContext) {
   try {
     await Group.findByIdAndUpdate(ctx.params.id, ctx.request.body)
-    ctx.body = ctx.resp.success({})
+    ctx.body = ctx.resp.success()
   } catch (error) {
-    ctx.body = ctx.resp.fail({})
+    ctx.body = ctx.resp.fail()
   }
 }
 

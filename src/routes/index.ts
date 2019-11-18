@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-02 10:43:03
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-13 17:28:52
+ * @ Modified time: 2019-11-18 17:58:18
  * @ Description: 路由总入口
  */
 
@@ -12,14 +12,36 @@ import util from './util'
 import project from './project'
 import group from './group'
 import mock from './mock'
-const router = new Router({
+import * as ratelimit from 'koa-ratelimit'
+import redisClient from '../tools/redis'
+import config from '../config'
+import * as restc from 'restc'
+import { mockApi } from '../controller/mock'
+const apiRouter = new Router({
   prefix: '/api'
 })
+const mockRouter = new Router({
+  prefix: '/mock'
+})
+const rate = ratelimit({
+  db: redisClient,
+  id: (ctx) => ctx.url,
+  max: config.rateLimit.max,
+  duration: config.rateLimit.duration,
+  errorMessage: 'Sometimes You Just Have to Slow Down.',
+  headers: {
+    remaining: 'Rate-Limit-Remaining',
+    reset: 'Rate-Limit-Reset',
+    total: 'Rate-Limit-Total'
+  }
+})
 export default (app: any) => {
-  router.use('/user', user.routes(), user.allowedMethods())
-  router.use('/util', util.routes(), util.allowedMethods())
-  router.use('/project', project.routes(), project.allowedMethods())
-  router.use('/group', group.routes(), group.allowedMethods())
-  router.use('/mock', mock.routes(), mock.allowedMethods())
-  app.use(router.routes(), router.allowedMethods())
+  mockRouter.all('*', rate, restc.koa2(), mockApi)
+  apiRouter.use('/user', user.routes(), user.allowedMethods())
+  apiRouter.use('/util', util.routes(), util.allowedMethods())
+  apiRouter.use('/project', project.routes(), project.allowedMethods())
+  apiRouter.use('/group', group.routes(), group.allowedMethods())
+  apiRouter.use('/mock', mock.routes(), mock.allowedMethods())
+  app.use(mockRouter.routes(), mockRouter.allowedMethods())
+  app.use(apiRouter.routes(), apiRouter.allowedMethods())
 }

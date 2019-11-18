@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-02 10:43:03
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-13 17:29:53
+ * @ Modified time: 2019-11-18 15:13:40
  * @ Description:用户控制层
  */
 
@@ -92,6 +92,6 @@ export async function findUserByKeyword(ctx: ParameterizedContext) {
     const users = await User.find({ username: keyExp }).lean()
     ctx.body = ctx.resp.success({ data: users })
   } catch (error) {
-    ctx.body = ctx.resp.fail({})
+    ctx.body = ctx.resp.fail()
   }
 }

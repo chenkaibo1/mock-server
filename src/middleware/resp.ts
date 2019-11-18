@@ -1,19 +1,19 @@
 import { Context } from 'koa'
 const respFn = {
-  success(resp: any) {
+  success(resp?: any) {
     return {
       code: 200,
       success: true,
-      message: resp.message || null,
-      data: resp.data || null
+      message: resp ? resp.message : null,
+      data: resp ? resp.data : null
     }
   },
-  fail(resp: any) {
+  fail(resp?: any) {
     return {
-      code: resp.code || -1,
+      code: resp ? resp.code : -1,
       success: false,
-      message: resp.message || null,
-      data: resp.data || null
+      message: resp ? resp.message : null,
+      data: resp ? resp.data : null
     }
   }
 }

@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-04 18:03:48
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-13 17:50:57
+ * @ Modified time: 2019-11-18 15:13:32
  * @ Description: 项目控制层
  */
 
@@ -35,7 +35,7 @@ export async function getProjects(ctx: ParameterizedContext) {
     ctx.body = ctx.resp.success({ data: projects })
   } catch (error) {
     console.log(error)
-    ctx.body = ctx.resp.fail({ message: '列表获取失败' })
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -51,7 +51,7 @@ export async function getProjectDetail(ctx: ParameterizedContext) {
     const project = await Project.findById(ctx.params.id).populate([ 'user', 'members', 'group' ]).lean()
     ctx.body = ctx.resp.success({ data: project })
   } catch (error) {
-    ctx.body = ctx.resp.fail({})
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -68,7 +68,7 @@ export async function getProjectsByGroup(ctx: ParameterizedContext) {
     const projects = await Project.find({ group }).populate([ 'user', 'members', 'group' ]).lean()
     ctx.body = ctx.resp.success({ data: projects })
   } catch (error) {
-    ctx.body = ctx.resp.fail({})
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -82,9 +82,9 @@ export async function getProjectsByGroup(ctx: ParameterizedContext) {
 export async function createProject(ctx: ParameterizedContext) {
   try {
     await Project.create(ctx.request.body)
-    ctx.body = ctx.resp.success({ message: '项目创建成功' })
+    ctx.body = ctx.resp.success()
   } catch (error) {
-    ctx.body = ctx.resp.fail({ message: '项目创建失败' })
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -119,9 +119,9 @@ export async function cloneProject(ctx: ParameterizedContext) {
       mode: item.mode
     }))
     await Mock.create(newAPIs)
-    ctx.body = ctx.resp.success({ message: '克隆成功' })
+    ctx.body = ctx.resp.success()
   } catch (error) {
-    ctx.body = ctx.resp.fail({ message: '克隆失败' })
+    ctx.body = ctx.resp.fail()
   }
 }
 
@@ -136,8 +136,8 @@ export async function removeProject(ctx: ParameterizedContext) {
   try {
     const id = ctx.params.id
     await Promise.all([ Project.deleteOne({ _id: id }), Mock.deleteMany({ project: id }) ])
-    ctx.body = ctx.resp.success({ message: '删除成功' })
+    ctx.body = ctx.resp.success()
   } catch (error) {
-    ctx.body = ctx.resp.fail({ message: '删除失败' })
+    ctx.body = ctx.resp.fail()
   }
 }
