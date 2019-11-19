@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-02 10:43:03
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-18 17:58:18
+ * @ Modified time: 2019-11-19 11:59:04
  * @ Description: 路由总入口
  */
 
@@ -17,6 +17,8 @@ import redisClient from '../tools/redis'
 import config from '../config'
 import * as restc from 'restc'
 import { mockApi } from '../controller/mock'
+// 加载订阅发布服务
+import '../common/substribe'
 const apiRouter = new Router({
   prefix: '/api'
 })
@@ -24,7 +26,7 @@ const mockRouter = new Router({
   prefix: '/mock'
 })
 const rate = ratelimit({
-  db: redisClient,
+  db: redisClient as any,
   id: (ctx) => ctx.url,
   max: config.rateLimit.max,
   duration: config.rateLimit.duration,
