@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-05 16:22:18
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-13 17:51:27
+ * @ Modified time: 2019-11-27 15:57:26
  * @ Description: mock数据模型
  */
 
@@ -16,6 +16,10 @@ const schema = new Schema({
   project: {
     type: ObjectId,
     ref: 'Project'
+  },
+  creator: {
+    type: ObjectId,
+    ref: 'User'
   },
   description: String,
   mode: String,

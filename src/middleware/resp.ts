@@ -1,4 +1,4 @@
-import { Context } from 'koa'
+import { ParameterizedContext } from 'koa'
 const respFn = {
   success(resp?: any) {
     return {
@@ -18,7 +18,7 @@ const respFn = {
   }
 }
 
-export default async (ctx: Context, next: any) => {
+export default async (ctx: ParameterizedContext, next: any) => {
   ctx.resp = respFn
   await next()
 }

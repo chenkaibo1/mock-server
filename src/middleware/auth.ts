@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken'
 import { User } from '../model'
 export default async (ctx: ParameterizedContext, next: any) => {
   try {
-    if (config.whitelist.includes(ctx.path)) {
+    if (config.whitelist.includes(ctx.path) || /^\/(mock).*/.test(ctx.path)) {
       await next()
     } else {
       // passport认证

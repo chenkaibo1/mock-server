@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-13 17:22:29
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-19 16:45:17
+ * @ Modified time: 2019-11-27 15:59:36
  * @ Description: 接口控制层
  */
 import { ParameterizedContext } from 'koa'
@@ -26,14 +26,14 @@ import * as tools from '../tools'
  */
 export async function getMockList(ctx: ParameterizedContext) {
   try {
-    const { pid } = ctx.query
-    let mocks: any[]
-    const redisKey = `project:${pid}:mocks`
-    mocks = JSON.parse(await redis.get(redisKey))
-    if (!mocks) {
-      mocks = await Mock.find({ project: pid }).lean()
-      redis.set(redisKey, JSON.stringify(mocks))
+    const { pid, type } = ctx.query
+    let search: any = {
+      project: pid
     }
+    if (type === 1) {
+      search.creator = ctx.state.user.id
+    }
+    const mocks = await Mock.find(search).lean()
     ctx.body = ctx.resp.success({ data: mocks })
   } catch (error) {
     ctx.body = ctx.resp.fail()
