@@ -27,7 +27,7 @@ const config = {
   },
   fileDirs: {
     image: {
-      user: resolve(__dirname, '../static/image/user')
+      user: resolve(__dirname, '../../static/image/user')
     }
   },
   unsplashClientId: '' // 登录页的背景图服务目前支持 默认由bing提供 (https://unsplash.com/developers) 与 [Bing](http://bing.com)

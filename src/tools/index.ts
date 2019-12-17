@@ -1,3 +1,5 @@
+import { networkInterfaces } from 'os'
+// @ts-ignore
 import { pathToRegexp } from 'path-to-regexp'
 /**
    * 安全的 decodeURIComponent
@@ -36,4 +38,20 @@ export function params(restURL, fullURL) {
   })
 
   return params
+}
+
+export function getLocalIP() {
+  let locatIp = ''
+  const ifaces = networkInterfaces()
+  for (let dev in ifaces) {
+    if (dev === '本地连接' || dev === '以太网') {
+      for (let j = 0; j < ifaces[dev].length; j++) {
+        if (ifaces[dev][j].family === 'IPv4') {
+          locatIp = ifaces[dev][j].address
+          break
+        }
+      }
+    }
+  }
+  return locatIp
 }

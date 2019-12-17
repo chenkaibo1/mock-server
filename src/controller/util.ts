@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-10-30 15:41:23
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-12-16 12:35:16
+ * @ Modified time: 2019-12-17 17:11:37
  * @ Description: 工具类控制层
  */
 
@@ -12,6 +12,7 @@ import config from '../config'
 import axios from 'axios'
 import * as koaBody from 'koa-body'
 import * as path from 'path'
+import { getLocalIP } from '../tools/index'
 /**
  * @description 获取壁纸
  * @author chenkaibo
@@ -60,16 +61,17 @@ export async function getWallpaper(ctx: ParameterizedContext) {
  * @export
  * @param {ParameterizedContext} ctx { category:类别, type: 类型 }
  */
-export async function upload(ctx: ParameterizedContext) {
+export async function upload(ctx: ParameterizedContext, next: any) {
   try {
     const category = ctx.query.category || 'image'
     const type = ctx.query.type || 'user'
     const fileDir = config.fileDirs[category][type]
-    await koaBody({
+    const upload = koaBody({
       multipart: true,
       formidable: {
         uploadDir: fileDir,
         keepExtensions: true,
+        multiples: false,
         onFileBegin: (name, file) => {
           const extname = path.extname(file.name)
           const newName = path.basename(file.name, extname) + new Date().getTime() + extname
@@ -78,12 +80,13 @@ export async function upload(ctx: ParameterizedContext) {
         }
       }
     })
-    const name = ctx.request.body.files.file.name
+    await upload(ctx, next)
+    const name = ctx.request.files.file.name
     ctx.body = ctx.resp.success({
       data: {
         name: name,
-        fullPath: `${fileDir}/${name}`,
-        path: `/${category}/${type}/${name}`
+        fullPath: `http://${getLocalIP}:${config.serve.port}/static/${category}/${type}/${name}`,
+        path: `/static/${category}/${type}/${name}`
       }
     })
   } catch (error) {

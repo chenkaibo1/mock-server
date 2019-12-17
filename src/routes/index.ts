@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-02 10:43:03
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-19 11:59:04
+ * @ Modified time: 2019-12-17 17:22:15
  * @ Description: 路由总入口
  */
 
@@ -17,6 +17,7 @@ import redisClient from '../tools/redis'
 import config from '../config'
 import * as restc from 'restc'
 import { mockApi } from '../controller/mock'
+
 // 加载订阅发布服务
 import '../common/substribe'
 const apiRouter = new Router({

@@ -13,6 +13,7 @@ import * as mongoose from 'mongoose'
 import config from './config'
 import middleware from './middleware'
 import initData from './tools/initData'
+import koaStatic from './middleware/static'
 const app = new Koa()
 
 // 连接数据库
@@ -33,6 +34,9 @@ app.use(possport.session()) // passport session策略
 onError(app)
 
 // middlewares
+
+process.env.NODE_ENV === 'development' && app.use(koaStatic.routes()).use(koaStatic.allowedMethods())
+
 app.use(
   bodyparser({
     enableTypes: [ 'json', 'form', 'text' ]
