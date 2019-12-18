@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-02 10:43:03
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-18 15:13:40
+ * @ Modified time: 2019-12-18 16:23:04
  * @ Description:用户控制层
  */
 
@@ -91,6 +91,26 @@ export async function findUserByKeyword(ctx: ParameterizedContext) {
     const keyExp = new RegExp(keyword, 'i')
     const users = await User.find({ username: keyExp }).lean()
     ctx.body = ctx.resp.success({ data: users })
+  } catch (error) {
+    ctx.body = ctx.resp.fail()
+  }
+}
+
+/**
+ * @description 用户编辑
+ * @author chenkaibo
+ * @date 2019-12-18
+ * @export
+ * @param {ParameterizedContext} ctx
+ */
+export async function editUser(ctx: ParameterizedContext) {
+  try {
+    const id = ctx.state.user.id
+    const data = ctx.request.body
+    await User.findByIdAndUpdate(id, data)
+    ctx.body = ctx.resp.success({
+      message: '用户信息修改成功，请重新登录'
+    })
   } catch (error) {
     ctx.body = ctx.resp.fail()
   }

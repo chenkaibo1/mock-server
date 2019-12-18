@@ -1,6 +1,8 @@
 import { networkInterfaces } from 'os'
 // @ts-ignore
 import { pathToRegexp } from 'path-to-regexp'
+import * as fs from 'fs'
+import * as path from 'path'
 /**
    * 安全的 decodeURIComponent
    * @param String str
@@ -54,4 +56,15 @@ export function getLocalIP() {
     }
   }
   return locatIp
+}
+// create folders
+export function mkdirsSync(dirname) {
+  if (fs.existsSync(dirname)) {
+    return true
+  } else {
+    if (mkdirsSync(path.dirname(dirname))) {
+      fs.mkdirSync(dirname)
+      return true
+    }
+  }
 }

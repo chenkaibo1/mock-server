@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-10-30 15:41:23
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-12-17 17:11:37
+ * @ Modified time: 2019-12-18 16:08:13
  * @ Description: 工具类控制层
  */
 
@@ -12,7 +12,7 @@ import config from '../config'
 import axios from 'axios'
 import * as koaBody from 'koa-body'
 import * as path from 'path'
-import { getLocalIP } from '../tools/index'
+import { getLocalIP, mkdirsSync } from '../tools/index'
 /**
  * @description 获取壁纸
  * @author chenkaibo
@@ -66,6 +66,7 @@ export async function upload(ctx: ParameterizedContext, next: any) {
     const category = ctx.query.category || 'image'
     const type = ctx.query.type || 'user'
     const fileDir = config.fileDirs[category][type]
+    mkdirsSync(fileDir)
     const upload = koaBody({
       multipart: true,
       formidable: {
@@ -85,8 +86,8 @@ export async function upload(ctx: ParameterizedContext, next: any) {
     ctx.body = ctx.resp.success({
       data: {
         name: name,
-        fullPath: `http://${getLocalIP}:${config.serve.port}/static/${category}/${type}/${name}`,
-        path: `/static/${category}/${type}/${name}`
+        fullPath: `http://${getLocalIP()}:${config.serve.port}/${category}/${type}/${name}`,
+        path: `/${category}/${type}/${name}`
       }
     })
   } catch (error) {
