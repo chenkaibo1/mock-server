@@ -6,7 +6,7 @@ const User = new Schema({
   headImg: String,
   username: String,
   password: String,
-  createAt: {
+  create_at: {
     type: Date,
     default: Date.now()
   }

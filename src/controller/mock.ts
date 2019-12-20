@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-11-13 17:22:29
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-11-27 15:59:36
+ * @ Modified time: 2019-12-19 11:57:17
  * @ Description: 接口控制层
  */
 import { ParameterizedContext } from 'koa'
@@ -16,6 +16,7 @@ import { publish } from 'postal'
 import axios from 'axios'
 import { assign } from 'lodash'
 import * as tools from '../tools'
+import * as moment from 'moment'
 
 /**
  * @description 根据项目id获取接口列表
@@ -144,6 +145,25 @@ export async function mockApi(ctx: ParameterizedContext) {
     let mockURL = '/' + (pathNode[3] || '')
     const redisKey = `project:mock:${projectId}:${method}:${mockURL}`
     let apiData: any = await redis.get(redisKey)
+    const mockCountTotalKey = 'mock:count:total'
+    const mockCountTodayKey = `mock:count:${moment().format('YYYY-MM-DD')}`
+    const mockTotal = await redis.get(mockCountTotalKey)
+    if (mockTotal) {
+      await redis.set(mockCountTotalKey, mockTotal + 1)
+    } else {
+      await redis.set(mockCountTotalKey, 1)
+    }
+    const mockToday = await redis.get(mockCountTodayKey)
+    if (mockToday) {
+      await redis.set(
+        mockCountTodayKey,
+        mockToday + 1,
+        'EX',
+        moment().add(1, 'day').startOf('day').unix() - moment().unix()
+      )
+    } else {
+      await redis.set(mockCountTodayKey, 1, 'EX', moment().add(1, 'day').startOf('day').unix() - moment().unix())
+    }
     if (apiData) {
       apiData = JSON.parse(apiData)
     } else {

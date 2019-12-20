@@ -2,7 +2,7 @@
  * @ Author: chenkaibo
  * @ Create Time: 2019-10-30 15:41:23
  * @ Modified by: chenkaibo
- * @ Modified time: 2019-12-18 16:08:13
+ * @ Modified time: 2019-12-19 15:15:28
  * @ Description: 工具类控制层
  */
 
@@ -13,6 +13,8 @@ import axios from 'axios'
 import * as koaBody from 'koa-body'
 import * as path from 'path'
 import { getLocalIP, mkdirsSync } from '../tools/index'
+import * as moment from 'moment'
+import { Project, User, Mock } from '../model'
 /**
  * @description 获取壁纸
  * @author chenkaibo
@@ -93,4 +95,51 @@ export async function upload(ctx: ParameterizedContext, next: any) {
   } catch (error) {
     ctx.body = ctx.resp.fail()
   }
+}
+
+/**
+ * @description 获取仪表盘数据
+ * @author chenkaibo
+ * @date 2019-12-19
+ * @export
+ * @param {ParameterizedContext} ctx
+ */
+export async function getDashboard(ctx: ParameterizedContext) {
+  try {
+    const todayQuery = { create_at: { $gt: moment().startOf('day') } }
+    const [
+      totalUseMockCount,
+      todayUseMockCount,
+      totalProjectCount,
+      todayProjectCount,
+      totalUserCount,
+      todayUserCount,
+      totalMockCount,
+      todayMockCount,
+      users
+    ] = await Promise.all([
+      redis.get('mock:count:total'),
+      redis.get(`mock:count:${moment().format('YYYY-MM-DD')}`),
+      Project.count({}),
+      Project.count(todayQuery),
+      User.count({}),
+      User.count(todayQuery),
+      Mock.count({}),
+      Mock.count(todayQuery),
+      User.find({})
+    ])
+    ctx.body = ctx.resp.success({
+      data: {
+        totalUseMockCount,
+        todayUseMockCount,
+        totalProjectCount,
+        todayProjectCount,
+        totalUserCount,
+        todayUserCount,
+        totalMockCount,
+        todayMockCount,
+        users
+      }
+    })
+  } catch (error) {}
 }
