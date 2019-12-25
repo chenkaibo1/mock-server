@@ -43,9 +43,9 @@ app.use(
   })
 )
 app.use(json())
-if (process.env.NODE_ENV === 'development') {
-  app.use(logger())
-}
+// if (process.env.NODE_ENV === 'development') {
+app.use(logger())
+// }
 
 middleware(app) // 加载中间件
 

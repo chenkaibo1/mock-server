@@ -9,7 +9,7 @@ const config = {
   session: {
     key: 'easy-mock:sess'
   },
-  whitelist: [ '/api/user/login', '/api/user/register' ],
+  whitelist: [ '/api/user/login', '/api/user/register', '/api/util/wallpaper' ],
   mongodb: {
     url: 'mongodb://localhost/easy-mock'
   },
