@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@types/postal": "^1.0.29",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.7.0",
     "cross-env": "^5.2.0",
     "debug": "^4.1.1",
