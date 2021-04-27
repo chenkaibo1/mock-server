@@ -43,7 +43,7 @@
     "passport-local": "^1.0.0",
     "path-to-regexp": "^5.0.0",
     "postal": "^2.0.5",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "reflect-metadata": "^0.1.13",
     "restc": "^0.4.0",
     "rimraf": "^2.6.2",
