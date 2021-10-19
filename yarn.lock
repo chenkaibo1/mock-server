@@ -1843,10 +1843,10 @@ vary@^1.1.2:
   resolved "https://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=
 
-vm2@^3.8.4:
-  version "3.8.4"
-  resolved "https://registry.npm.taobao.org/vm2/download/vm2-3.8.4.tgz#882be9135467942d84d1af80b6e6549b57c69041"
-  integrity sha1-iCvpE1RnlC2E0a+AtuZUm1fGkEE=
+vm2@^3.9.4:
+  version "3.9.4"
+  resolved "https://registry.yarnpkg.com/vm2/-/vm2-3.9.4.tgz#2e118290fefe7bd8ea09ebe2f5faf53730dbddaa"
+  integrity sha512-sOdharrJ7KEePIpHekiWaY1DwgueuiBeX/ZBJUPgETsVlJsXuEx0K0/naATq2haFvJrvZnRiORQRubR0b7Ye6g==
 
 which@^1.2.9:
   version "1.3.1"
