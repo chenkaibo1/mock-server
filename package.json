@@ -47,7 +47,7 @@
     "reflect-metadata": "^0.1.13",
     "restc": "^0.4.0",
     "rimraf": "^2.6.2",
-    "vm2": "^3.8.4"
+    "vm2": "^3.9.6"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.27",
